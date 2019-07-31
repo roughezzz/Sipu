@@ -31,6 +31,8 @@
       var slider = document.getElementById("slider");
       var value = document.getElementById("value");
       value.innerHTML = slider.value;
+      var result = document.getElementById("result");
+      result.innerHTML = slider.value + " litre";
 
       var canvas = document.getElementById("canvas");
       var barrel = canvas.getContext("2d");
@@ -42,8 +44,17 @@
 
       slider.oninput = function() {
         value.innerHTML = this.value;
-        var sliderValue = this.value;
-        var degree = (360 / 200 / 2) * sliderValue;
+        var d = this.value;
+        var r = 100;
+        var h = d - r;
+        var areaWater =
+          Math.PI * r * r -
+          r * r * Math.acos(h / r) +
+          h * Math.sqrt(2 * r * d - d * d);
+        var volumeWater = (areaWater * 100) / 1000;
+        result.innerHTML = volumeWater.toFixed(2) + " litres";
+
+        var degree = (360 / 200 / 2) * d;
         var radian = (Math.PI / 180) * degree;
 
         var startAngle = Math.PI / 2 - radian;
