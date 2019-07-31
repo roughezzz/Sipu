@@ -32,9 +32,9 @@
       // var barrel = canvas.getContext("2d");
       var water = canvas.getContext("2d");
       
-      // barrel.beginPath();
-      // barrel.arc(400, 250, 200, 0, Math.PI * 2);
-      // barrel.stroke();
+      barrel.beginPath();
+      barrel.arc(400, 250, 200, 0, Math.PI * 2);
+      barrel.stroke();
       // water.arc(400, 250, 200, 0, Math.PI, false);
       // water.closePath();
       // water.fillStyle = "grey";
@@ -45,10 +45,15 @@
         var sliderValue = this.value
         var degree = sliderValue;
         var radian = (Math.PI /180) * degree;
+
+        var startAngle = 1.1*radian;
+        var endAngle =  1.9*radian;
         
-        water.arc(400, 250, 200, 0, radian, false);
+        water.beginPath();
+        water.arc(400, 250, 200, startAngle, endAngle, false);
         water.closePath();
         water.fillStyle = "grey";
+        water.stroke();
         water.fill();
       };
     </script>
