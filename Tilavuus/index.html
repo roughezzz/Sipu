@@ -15,10 +15,14 @@
         <p>Saada nestepinnan</p>
         <p><span id="value"></span></p>
         <span>0cm</span>
-        <input type="range" min="0" max="200" id="slider" value="0"/>
+        <input type="range" min="0" max="200" id="slider" value="0" />
         <span>200cm</span>
       </div>
       <div>
+        <div style="margin-left: -650px">
+          Nestemäärä
+          <p id="result"></p>
+        </div>
         <canvas id="canvas" width="800px" height="500px"></canvas>
       </div>
     </div>
@@ -29,31 +33,27 @@
       value.innerHTML = slider.value;
 
       var canvas = document.getElementById("canvas");
-      // var barrel = canvas.getContext("2d");
+      var barrel = canvas.getContext("2d");
       var water = canvas.getContext("2d");
-      
+
       barrel.beginPath();
       barrel.arc(400, 250, 200, 0, Math.PI * 2);
       barrel.stroke();
-      // water.arc(400, 250, 200, 0, Math.PI, false);
-      // water.closePath();
-      // water.fillStyle = "grey";
-      // water.fill();
 
       slider.oninput = function() {
         value.innerHTML = this.value;
-        var sliderValue = this.value
-        var degree = sliderValue;
-        var radian = (Math.PI /180) * degree;
+        var sliderValue = this.value;
+        var degree = (360 / 200 / 2) * sliderValue;
+        var radian = (Math.PI / 180) * degree;
 
-        var startAngle = 1.1*radian;
-        var endAngle =  1.9*radian;
-        
+        var startAngle = Math.PI / 2 - radian;
+        var endAngle = Math.PI / 2 + radian;
+
         water.beginPath();
         water.arc(400, 250, 200, startAngle, endAngle, false);
         water.closePath();
         water.fillStyle = "grey";
-        water.stroke();
+        // water.stroke();
         water.fill();
       };
     </script>
