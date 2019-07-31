@@ -15,7 +15,7 @@
         <p>Saada nestepinnan</p>
         <p><span id="value"></span></p>
         <span>0cm</span>
-        <input type="range" min="0" max="200" id="slider" />
+        <input type="range" min="0" max="200" id="slider" value="0"/>
         <span>200cm</span>
       </div>
       <div>
@@ -29,14 +29,27 @@
       value.innerHTML = slider.value;
 
       var canvas = document.getElementById("canvas");
-      var context = canvas.getContext("2d");
-
-      context.arc(400, 250, 200, 0, Math.PI * 2);
-      context.fillStyle = "grey";
-      context.stroke();
+      // var barrel = canvas.getContext("2d");
+      var water = canvas.getContext("2d");
+      
+      // barrel.beginPath();
+      // barrel.arc(400, 250, 200, 0, Math.PI * 2);
+      // barrel.stroke();
+      // water.arc(400, 250, 200, 0, Math.PI, false);
+      // water.closePath();
+      // water.fillStyle = "grey";
+      // water.fill();
 
       slider.oninput = function() {
         value.innerHTML = this.value;
+        var sliderValue = this.value
+        var degree = sliderValue;
+        var radian = (Math.PI /180) * degree;
+        
+        water.arc(400, 250, 200, 0, radian, false);
+        water.closePath();
+        water.fillStyle = "grey";
+        water.fill();
       };
     </script>
   </body>
